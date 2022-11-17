@@ -1602,134 +1602,132 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
         end
 
 
+	function PagesHandler:CreateDropdown(DropdownMainText, Contents, callback)
+	    DropdownMainText = DropdownMainText or "Dropdown Text"
+	    callback = callback or function() end	
+
+	    local PageDropdownFrame = Instance.new("Frame")
+	    local DropdownText = Instance.new("TextLabel")
+	    local DropdownFrameCorner = Instance.new("UICorner")
+	    local DropdownArrow = Instance.new("ImageButton")
+	    local DropdownMainButton = Instance.new("TextButton")
+	    local PageDropdownScrollingFrame = Instance.new("ScrollingFrame")
+	    local DropdownTextButton = Instance.new("TextButton")
+	    local DropdownTextButtonCorner = Instance.new("UICorner")
+	    local DropdownScrollCorner = Instance.new("UICorner")
+	    local DropdownScrollListLayout = Instance.new("UIListLayout")
+	    local DropdownScrollPadding = Instance.new("UIPadding")
 
 
-        function PagesHandler:CreateDropdown(DropdownMainText, Contents, callback)
-            DropdownMainText = DropdownMainText or "Dropdown Text"
-            callback = callback or function() end	
+	    PageDropdownFrame.Name = "PageDropdownFrame"
+	    PageDropdownFrame.Parent = newPage
+	    PageDropdownFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	    PageDropdownFrame.BorderSizePixel = 0
+	    PageDropdownFrame.Position = UDim2.new(0.0211267602, 0, 0.0235245991, 0)
+	    PageDropdownFrame.Size = UDim2.new(0, 340, 0, 25)
 
-            local PageDropdownFrame = Instance.new("Frame")
-            local DropdownText = Instance.new("TextLabel")
-            local DropdownFrameCorner = Instance.new("UICorner")
-            local DropdownArrow = Instance.new("ImageButton")
-            local DropdownMainButton = Instance.new("TextButton")
-            local PageDropdownScrollingFrame = Instance.new("ScrollingFrame")
-            local DropdownTextButton = Instance.new("TextButton")
-            local DropdownTextButtonCorner = Instance.new("UICorner")
-            local DropdownScrollCorner = Instance.new("UICorner")
-            local DropdownScrollListLayout = Instance.new("UIListLayout")
-            local DropdownScrollPadding = Instance.new("UIPadding")
-        
-        
-            PageDropdownFrame.Name = "PageDropdownFrame"
-            PageDropdownFrame.Parent = newPage
-            PageDropdownFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-            PageDropdownFrame.BorderSizePixel = 0
-            PageDropdownFrame.Position = UDim2.new(0.0211267602, 0, 0.0235245991, 0)
-            PageDropdownFrame.Size = UDim2.new(0, 340, 0, 25)
-    
-            DropdownText.Name = "DropdownText"
-            DropdownText.Parent = PageDropdownFrame
-            DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownText.BackgroundTransparency = 1.000
-            DropdownText.BorderSizePixel = 0
-            DropdownText.Position = UDim2.new(0.0294117648, 0, 0, 0)
-            DropdownText.Size = UDim2.new(0, 300, 0, 25)
-            DropdownText.Font = Enum.Font.Cartoon
-            DropdownText.Text = "Dropdown"
-            DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownText.TextSize = 15.000
-            DropdownText.TextStrokeTransparency = 0.900
-            DropdownText.TextTransparency = 0.300
-            DropdownText.TextWrapped = true
-            DropdownText.TextXAlignment = Enum.TextXAlignment.Left
-    
-            DropdownFrameCorner.Name = "DropdownFrameCorner"
-            DropdownFrameCorner.Parent = PageDropdownFrame
-    
-            DropdownArrow.Name = "DropdownArrow"
-            DropdownArrow.Parent = PageDropdownFrame
-            DropdownArrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownArrow.BackgroundTransparency = 1.000
-            DropdownArrow.Position = UDim2.new(0.925000012, 0, 0.0799999982, 0)
-            DropdownArrow.Rotation = 180.000
-            DropdownArrow.Size = UDim2.new(0, 20, 0, 20)
-            DropdownArrow.Image = "http://www.roblox.com/asset/?id=71659683"
-    
-            DropdownMainButton.Name = "DropdownMainButton"
-            DropdownMainButton.Parent = PageDropdownFrame
-            DropdownMainButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownMainButton.BackgroundTransparency = 1.000
-            DropdownMainButton.BorderSizePixel = 0
-            DropdownMainButton.Size = UDim2.new(0, 339, 0, 25)
-            DropdownMainButton.Font = Enum.Font.SourceSans
-            DropdownMainButton.Text = ""
-            DropdownMainButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-            DropdownMainButton.TextSize = 14.000
-    
-            PageDropdownScrollingFrame.Name = "PageDropdownScrollingFrame"
-            PageDropdownScrollingFrame.Parent = newPage
-            PageDropdownScrollingFrame.Active = true
-            PageDropdownScrollingFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-            PageDropdownScrollingFrame.BorderSizePixel = 0
-            PageDropdownScrollingFrame.Position = UDim2.new(0.0633802786, 0, 0.156156242, 0)
-            PageDropdownScrollingFrame.Size = UDim2.new(0, 340, 0, 155)
-            PageDropdownScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-            PageDropdownScrollingFrame.ScrollBarThickness = 5
-    
-            DropdownTextButton.Name = "DropdownTextButton"
-            DropdownTextButton.Parent = PageDropdownScrollingFrame
-            DropdownTextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-            DropdownTextButton.Size = UDim2.new(0, 310, 0, 25)
-            DropdownTextButton.Font = Enum.Font.Cartoon
-            DropdownTextButton.Text = "Dropdown Text"
-            DropdownTextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            DropdownTextButton.TextSize = 15.000
-            DropdownTextButton.TextStrokeTransparency = 0.900
-            DropdownTextButton.TextTransparency = 0.300
-            DropdownTextButton.TextWrapped = true
-    
-            DropdownTextButtonCorner.CornerRadius = UDim.new(0, 5)
-            DropdownTextButtonCorner.Name = "DropdownTextButtonCorner"
-            DropdownTextButtonCorner.Parent = DropdownTextButton
-    
-            DropdownScrollCorner.CornerRadius = UDim.new(0, 5)
-            DropdownScrollCorner.Name = "DropdownScrollCorner"
-            DropdownScrollCorner.Parent = PageDropdownScrollingFrame
-    
-            DropdownScrollListLayout.Name = "DropdownScrollListLayout"
-            DropdownScrollListLayout.Parent = PageDropdownScrollingFrame
-            DropdownScrollListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-            DropdownScrollListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-            DropdownScrollListLayout.Padding = UDim.new(0, 5)
-    
-            DropdownScrollPadding.Name = "DropdownScrollPadding"
-            DropdownScrollPadding.Parent = PageDropdownScrollingFrame
-            DropdownScrollPadding.PaddingTop = UDim.new(0, 5)
+	    DropdownText.Name = "DropdownText"
+	    DropdownText.Parent = PageDropdownFrame
+	    DropdownText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	    DropdownText.BackgroundTransparency = 1.000
+	    DropdownText.BorderSizePixel = 0
+	    DropdownText.Position = UDim2.new(0.0294117648, 0, 0, 0)
+	    DropdownText.Size = UDim2.new(0, 300, 0, 25)
+	    DropdownText.Font = Enum.Font.Cartoon
+	    DropdownText.Text = "Dropdown"
+	    DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
+	    DropdownText.TextSize = 15.000
+	    DropdownText.TextStrokeTransparency = 0.900
+	    DropdownText.TextTransparency = 0.300
+	    DropdownText.TextWrapped = true
+	    DropdownText.TextXAlignment = Enum.TextXAlignment.Left
+
+	    DropdownFrameCorner.Name = "DropdownFrameCorner"
+	    DropdownFrameCorner.Parent = PageDropdownFrame
+
+	    DropdownArrow.Name = "DropdownArrow"
+	    DropdownArrow.Parent = PageDropdownFrame
+	    DropdownArrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	    DropdownArrow.BackgroundTransparency = 1.000
+	    DropdownArrow.Position = UDim2.new(0.925000012, 0, 0.0799999982, 0)
+	    DropdownArrow.Rotation = 180.000
+	    DropdownArrow.Size = UDim2.new(0, 20, 0, 20)
+	    DropdownArrow.Image = "http://www.roblox.com/asset/?id=71659683"
+
+	    DropdownMainButton.Name = "DropdownMainButton"
+	    DropdownMainButton.Parent = PageDropdownFrame
+	    DropdownMainButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	    DropdownMainButton.BackgroundTransparency = 1.000
+	    DropdownMainButton.BorderSizePixel = 0
+	    DropdownMainButton.Size = UDim2.new(0, 339, 0, 25)
+	    DropdownMainButton.Font = Enum.Font.SourceSans
+	    DropdownMainButton.Text = ""
+	    DropdownMainButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	    DropdownMainButton.TextSize = 14.000
+
+	    PageDropdownScrollingFrame.Name = "PageDropdownScrollingFrame"
+	    PageDropdownScrollingFrame.Parent = newPage
+	    PageDropdownScrollingFrame.Active = true
+	    PageDropdownScrollingFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+	    PageDropdownScrollingFrame.BorderSizePixel = 0
+	    PageDropdownScrollingFrame.Position = UDim2.new(0.0633802786, 0, 0.156156242, 0)
+	    PageDropdownScrollingFrame.Size = UDim2.new(0, 340, 0, 155)
+	    PageDropdownScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+	    PageDropdownScrollingFrame.ScrollBarThickness = 5
+
+	    DropdownTextButton.Name = "DropdownTextButton"
+	    DropdownTextButton.Parent = PageDropdownScrollingFrame
+	    DropdownTextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	    DropdownTextButton.Size = UDim2.new(0, 310, 0, 25)
+	    DropdownTextButton.Font = Enum.Font.Cartoon
+	    DropdownTextButton.Text = DropdownMainText
+	    DropdownTextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	    DropdownTextButton.TextSize = 15.000
+	    DropdownTextButton.TextStrokeTransparency = 0.900
+	    DropdownTextButton.TextTransparency = 0.300
+	    DropdownTextButton.TextWrapped = true
+
+	    DropdownTextButtonCorner.CornerRadius = UDim.new(0, 5)
+	    DropdownTextButtonCorner.Name = "DropdownTextButtonCorner"
+	    DropdownTextButtonCorner.Parent = DropdownTextButton
+
+	    DropdownScrollCorner.CornerRadius = UDim.new(0, 5)
+	    DropdownScrollCorner.Name = "DropdownScrollCorner"
+	    DropdownScrollCorner.Parent = PageDropdownScrollingFrame
+
+	    DropdownScrollListLayout.Name = "DropdownScrollListLayout"
+	    DropdownScrollListLayout.Parent = PageDropdownScrollingFrame
+	    DropdownScrollListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	    DropdownScrollListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	    DropdownScrollListLayout.Padding = UDim.new(0, 5)
+
+	    DropdownScrollPadding.Name = "DropdownScrollPadding"
+	    DropdownScrollPadding.Parent = PageDropdownScrollingFrame
+	    DropdownScrollPadding.PaddingTop = UDim.new(0, 5)
 
 
-            PageDropdownScrollingFrame.Active = false
-            PageDropdownScrollingFrame.Visible = false
+	    PageDropdownScrollingFrame.Active = false
+	    PageDropdownScrollingFrame.Visible = false
 
-            local function TEGYQ_fake_script() -- PageDropdownScrollingFrame.DropdownScrollFixer 
-                local script = Instance.new('Script', PageDropdownScrollingFrame)
-            
-                spawn(function()
-                    getgenv().autofixertheui = true
-                    while autofixertheui do wait()
-                        pcall(function()
-                            local function UpdateCanvasSize(Canvas, Constraint)
-                                Canvas.CanvasSize = UDim2.new(0, 0, 0, Constraint.AbsoluteContentSize.Y+15)
-                            end
-                
-                            wait() --//Idk why add wait LMFAO//
-                
-                            UpdateCanvasSize(script.Parent, script.Parent.DropdownScrollListLayout)
-                        end)
-                    end
-                end)
-            end
-            coroutine.wrap(TEGYQ_fake_script)()
+	    local function TEGYQ_fake_script() -- PageDropdownScrollingFrame.DropdownScrollFixer 
+		local script = Instance.new('Script', PageDropdownScrollingFrame)
+
+		spawn(function()
+		    getgenv().autofixertheui = true
+		    while autofixertheui do wait()
+			pcall(function()
+			    local function UpdateCanvasSize(Canvas, Constraint)
+				Canvas.CanvasSize = UDim2.new(0, 0, 0, Constraint.AbsoluteContentSize.Y+15)
+			    end
+
+			    wait() --//Idk why add wait LMFAO//
+
+			    UpdateCanvasSize(script.Parent, script.Parent.DropdownScrollListLayout)
+			end)
+		    end
+		end)
+	    end
+	    coroutine.wrap(TEGYQ_fake_script)()
 
 
             local function onInputBegan(input, gameProcessed)
