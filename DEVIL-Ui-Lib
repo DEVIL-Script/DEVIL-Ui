@@ -110,7 +110,7 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
 
 
     -- Scripts:
-
+--[[
     local function BUbABUBAPUTA_fake_script()
     local script1 = Instance.new('Script', Main)
         game:GetService("UserInputService").InputBegan:Connect(function(key)
@@ -120,7 +120,7 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
         end)
     end
     coroutine.wrap(BUbABUBAPUTA_fake_script)()
-
+]]
 
 
     local function ZBUJHKQ_fake_script() -- Main.Draggable 
@@ -1978,4 +1978,6 @@ if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and no
     return(DEVIL_UI_Library_Mobile)
 elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
     return(DEVIL_UI_Library_PC)
+else
+    return(DEVIL_UI_Library_Mobile)
 end
