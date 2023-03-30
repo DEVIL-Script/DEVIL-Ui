@@ -57,6 +57,7 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
     HubName.Size = UDim2.new(0, 490, 0, 40)
     HubName.Font = Enum.Font.Cartoon
     HubName.Text = GuiName.." : "..GameName
+    HubName.TextScaled = true
     HubName.TextTransparency = 0.3
     HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
     HubName.TextSize = 23.000
@@ -1007,6 +1008,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
     HubName.Size = UDim2.new(0, 490, 0, 40)
     HubName.Font = Enum.Font.Cartoon
     HubName.Text = GuiName.." : "..GameName
+    HubName.TextScaled = true
     HubName.TextColor3 = Color3.fromRGB(255, 255, 255)
     HubName.TextSize = 34.000
     HubName.TextWrapped = true
