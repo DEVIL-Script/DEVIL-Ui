@@ -1084,7 +1084,154 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
     end
     coroutine.wrap(LNWIAV_fake_script)()
 
+    local function QVUFO_fake_script() -- Main.DraggableScript 
+        local script = Instance.new('Script', Main)
 
+        --[[
+                
+            Works on mobile to 🥱
+            If this dont work then just throw you pc/mobile retard 😂
+        
+        ]]
+        
+        
+        
+        local UserInputService = game:GetService("UserInputService")
+        
+        local gui = script.Parent
+        
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+        
+        local function update(input)
+            local delta = input.Position - dragStart
+            gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+        
+        gui.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = gui.Position
+        
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging = false
+                    end
+                end)
+            end
+        end)
+        
+        gui.InputChanged:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                dragInput = input
+            end
+        end)
+        
+        UserInputService.InputChanged:Connect(function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end)
+    end
+    coroutine.wrap(QVUFO_fake_script)()
+    local function FAIHHBB_fake_script() -- Line.Script 
+        local script = Instance.new('Script', Line)
+
+        --[[local fakename = script.Parent
+        local top = 100
+        while true do
+            wait()
+            for i = 1,top,1 do
+                fakename.BackgroundColor3 = Color3.new(i/top,0/top,0/top)
+                wait()
+            end
+            for i = 1,top,1 do
+                fakename.BackgroundColor3 = Color3.new(top/top,i/top,0/top)
+                wait()
+            end
+            for i = 1,top,1 do
+                fakename.BackgroundColor3 = Color3.new(top/top,top/top,i/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BackgroundColor3 = Color3.new(i/top,top/top,top/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BackgroundColor3 = Color3.new(0/top,i/top,top/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BackgroundColor3 = Color3.new(0/top,0/top,i/top)
+                wait()
+            end
+        end
+        ]]
+        spawn(function()
+            while wait() do
+                pcall(function()
+                    local r = (math.sin(workspace.DistributedGameTime/2)/2)+0.5
+                    local g = (math.sin(workspace.DistributedGameTime)/2)+0.5
+                    local b = (math.sin(workspace.DistributedGameTime*1.5)/2)+0.5
+                    local color = Color3.new(r, g, b)
+                    script.Parent.BackgroundColor3 = color
+                end)
+            end
+        end)
+    end
+    coroutine.wrap(FAIHHBB_fake_script)()
+    
+    
+
+    local function CAKBVSK_fake_script() -- Main.Script 
+        local script = Instance.new('Script', Main)
+
+        --[[local fakename = script.Parent
+        local top = 100
+        while true do
+            wait()
+            for i = 1,top,1 do
+                fakename.BorderColor3 = Color3.new(i/top,0/top,0/top)
+                wait()
+            end
+            for i = 1,top,1 do
+                fakename.BorderColor3 = Color3.new(top/top,i/top,0/top)
+                wait()
+            end
+            for i = 1,top,1 do
+                fakename.BorderColor3 = Color3.new(top/top,top/top,i/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BorderColor3 = Color3.new(i/top,top/top,top/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BorderColor3 = Color3.new(0/top,i/top,top/top)
+                wait()
+            end
+            for i = top,1,-1 do
+                fakename.BorderColor3 = Color3.new(0/top,0/top,i/top)
+                wait()
+            end
+        end]]
+        
+        spawn(function()
+            while wait() do
+                pcall(function()
+                    local r = (math.sin(workspace.DistributedGameTime/2)/2)+0.5
+                    local g = (math.sin(workspace.DistributedGameTime)/2)+0.5
+                    local b = (math.sin(workspace.DistributedGameTime*1.5)/2)+0.5
+                    local color = Color3.new(r, g, b)
+                    script.Parent.BorderColor3 = color
+                end)
+            end
+        end)
+    end
+    coroutine.wrap(CAKBVSK_fake_script)()
 
     local TabsHandler = {}
 
@@ -1244,7 +1391,6 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
         end
 
 
-
         function PagesHandler:CreateTextLabel(TextLabelMainText, callback)
             TextLabelMainText = TextLabelMainText or "TextLabel"
 
@@ -1275,6 +1421,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             TextLabelCorner.Name = "TextLabelCorner"
             TextLabelCorner.Parent = TextLabel
         end
+
 
         function PagesHandler:CreateSection(SectionMainText)
             SectionMainText = SectionMainText or "Section Text"
@@ -1353,6 +1500,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             PageButton.InputBegan:Connect(onInputBegan)
 
         end
+
 
         function PagesHandler:CreateToggle(ToggleMainText, callback)
             ToggleMainText = ToggleMainText or "Toggle Text"
@@ -1602,7 +1750,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
         end
 
 
-	function PagesHandler:CreateDropdown(DropdownMainText, Contents, callback)
+	function PagesHandler:CreateDropdown(DropdownMainText, Contents, callback) --PC
 	    DropdownMainText = DropdownMainText or "Dropdown Text"
 	    callback = callback or function() end	
 
@@ -1634,7 +1782,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 	    DropdownText.Position = UDim2.new(0.0294117648, 0, 0, 0)
 	    DropdownText.Size = UDim2.new(0, 300, 0, 25)
 	    DropdownText.Font = Enum.Font.Cartoon
-	    DropdownText.Text = "Dropdown"
+	    DropdownText.Text = DropdownMainText
 	    DropdownText.TextColor3 = Color3.fromRGB(255, 255, 255)
 	    DropdownText.TextSize = 15.000
 	    DropdownText.TextStrokeTransparency = 0.900
@@ -1805,162 +1953,6 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             CreateContents(Contents)
         end
 
-
-
-
-
-
-        -- Scripts:
-
-        local function QVUFO_fake_script() -- Main.DraggableScript 
-            local script = Instance.new('Script', Main)
-
-            --[[
-                    
-                Works on mobile to 🥱
-                If this dont work then just throw you pc/mobile retard 😂
-            
-            ]]
-            
-            
-            
-            local UserInputService = game:GetService("UserInputService")
-            
-            local gui = script.Parent
-            
-            local dragging
-            local dragInput
-            local dragStart
-            local startPos
-            
-            local function update(input)
-                local delta = input.Position - dragStart
-                gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-            end
-            
-            gui.InputBegan:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    dragging = true
-                    dragStart = input.Position
-                    startPos = gui.Position
-            
-                    input.Changed:Connect(function()
-                        if input.UserInputState == Enum.UserInputState.End then
-                            dragging = false
-                        end
-                    end)
-                end
-            end)
-            
-            gui.InputChanged:Connect(function(input)
-                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-                    dragInput = input
-                end
-            end)
-            
-            UserInputService.InputChanged:Connect(function(input)
-                if input == dragInput and dragging then
-                    update(input)
-                end
-            end)
-        end
-        coroutine.wrap(QVUFO_fake_script)()
-        local function FAIHHBB_fake_script() -- Line.Script 
-            local script = Instance.new('Script', Line)
-
-            --[[local fakename = script.Parent
-            local top = 100
-            while true do
-                wait()
-                for i = 1,top,1 do
-                    fakename.BackgroundColor3 = Color3.new(i/top,0/top,0/top)
-                    wait()
-                end
-                for i = 1,top,1 do
-                    fakename.BackgroundColor3 = Color3.new(top/top,i/top,0/top)
-                    wait()
-                end
-                for i = 1,top,1 do
-                    fakename.BackgroundColor3 = Color3.new(top/top,top/top,i/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BackgroundColor3 = Color3.new(i/top,top/top,top/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BackgroundColor3 = Color3.new(0/top,i/top,top/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BackgroundColor3 = Color3.new(0/top,0/top,i/top)
-                    wait()
-                end
-            end
-            ]]
-            spawn(function()
-                while wait() do
-                    pcall(function()
-                        local r = (math.sin(workspace.DistributedGameTime/2)/2)+0.5
-                        local g = (math.sin(workspace.DistributedGameTime)/2)+0.5
-                        local b = (math.sin(workspace.DistributedGameTime*1.5)/2)+0.5
-                        local color = Color3.new(r, g, b)
-                        script.Parent.BackgroundColor3 = color
-                    end)
-                end
-            end)
-        end
-        coroutine.wrap(FAIHHBB_fake_script)()
-        
-        
-
-        local function CAKBVSK_fake_script() -- Main.Script 
-            local script = Instance.new('Script', Main)
-
-            --[[local fakename = script.Parent
-            local top = 100
-            while true do
-                wait()
-                for i = 1,top,1 do
-                    fakename.BorderColor3 = Color3.new(i/top,0/top,0/top)
-                    wait()
-                end
-                for i = 1,top,1 do
-                    fakename.BorderColor3 = Color3.new(top/top,i/top,0/top)
-                    wait()
-                end
-                for i = 1,top,1 do
-                    fakename.BorderColor3 = Color3.new(top/top,top/top,i/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BorderColor3 = Color3.new(i/top,top/top,top/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BorderColor3 = Color3.new(0/top,i/top,top/top)
-                    wait()
-                end
-                for i = top,1,-1 do
-                    fakename.BorderColor3 = Color3.new(0/top,0/top,i/top)
-                    wait()
-                end
-            end]]
-            
-            spawn(function()
-                while wait() do
-                    pcall(function()
-                        local r = (math.sin(workspace.DistributedGameTime/2)/2)+0.5
-                        local g = (math.sin(workspace.DistributedGameTime)/2)+0.5
-                        local b = (math.sin(workspace.DistributedGameTime*1.5)/2)+0.5
-                        local color = Color3.new(r, g, b)
-                        script.Parent.BorderColor3 = color
-                    end)
-                end
-            end)
-        end
-        coroutine.wrap(CAKBVSK_fake_script)()
-
         return PagesHandler
 
     end
@@ -1968,10 +1960,6 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
     return TabsHandler
 
 end
-
---return DEVIL_UI_Library_PC
-
-
 
 local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
