@@ -516,28 +516,39 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
             ToggleFrameCorner.Parent = PageToggleFrame
 
             local tog = false
-			
+            local isDragging = false
+
+            local function animateToggle()
+                local endColor = tog and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(60, 60, 60)
+                game.TweenService:Create(ToggleButton, TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                    BackgroundColor3 = endColor
+                }):Play()
+                -- Add any other animation you want for the toggle here (e.g., scaling, moving, etc.)
+            end
+
             local function onInputBegan(input, gameProcessed)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    tog = not tog
-				    callback(tog) -- Callbacks whenever we toggle
-                    if tog then 
-                        game.TweenService:Create(ToggleButton, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-                        }):Play()
-                        --- We put our animation here when the toggle is on
-                    else
-                        game.TweenService:Create(ToggleButton, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-                        }):Play()
-                        ---We Put our animation here when the toggle is off
+                    isDragging = true
+                end
+            end
+
+            local function onInputEnded(input, gameProcessed)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    if isDragging then
+                        tog = not tog
+                        callback(tog) -- Callbacks whenever we toggle
+                        animateToggle()
+                        isDragging = false
                     end
                 end
             end
+
             ToggleButton.InputBegan:Connect(onInputBegan)
+            ToggleButton.InputEnded:Connect(onInputEnded)
+
+
 
 		end
-
 
 
         function PagesHandler:CreateSlider(SliderMainText, options , callback)
@@ -1554,24 +1565,36 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             ToggleFrameCorner.Parent = PageToggleFrame
             
 
+            local tog = false
+            local isDragging = false
+
+            local function animateToggle()
+                local endColor = tog and Color3.fromRGB(0, 0, 0) or Color3.fromRGB(60, 60, 60)
+                game.TweenService:Create(ToggleButton, TweenInfo.new(0.2, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+                    BackgroundColor3 = endColor
+                }):Play()
+                -- Add any other animation you want for the toggle here (e.g., scaling, moving, etc.)
+            end
+
             local function onInputBegan(input, gameProcessed)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    tog = not tog
-				    callback(tog) -- Callbacks whenever we toggle
-                    if tog then 
-                        game.TweenService:Create(ToggleButton, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-                        }):Play()
-                        --- We put our animation here when the toggle is on
-                    else
-                        game.TweenService:Create(ToggleButton, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-                        }):Play()
-                        ---We Put our animation here when the toggle is off
+                    isDragging = true
+                end
+            end
+
+            local function onInputEnded(input, gameProcessed)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    if isDragging then
+                        tog = not tog
+                        callback(tog) -- Callbacks whenever we toggle
+                        animateToggle()
+                        isDragging = false
                     end
                 end
             end
+
             ToggleButton.InputBegan:Connect(onInputBegan)
+            ToggleButton.InputEnded:Connect(onInputEnded)
 
             
         end
@@ -1963,6 +1986,26 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 
 end
 
+--[[
+local DEVIL_UI_Library = DEVIL_UI_Library_PC
+local Window = DEVIL_UI_Library:CreateWindow("YT - DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+
+local Main = Window:CreateTab("Main")
+
+getgenv().acws = false
+Main:CreateToggle("Auto Complete WorkShift", function(bool)
+    getgenv().acws = bool
+    if bool then
+        spawn(function()
+            while acws do wait()
+                pcall(function()
+                    print("A")
+                end)
+            end
+        end)
+    end
+end)
+]]
 local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
     return(DEVIL_UI_Library_Mobile)
