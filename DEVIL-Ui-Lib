@@ -111,7 +111,33 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
 
 
     -- Scripts:
---[[
+
+    --working
+    local DEVILScriptUIToggleImage = Instance.new("ImageButton")
+    DEVILScriptUIToggleImage.Parent = DEVIL_UI_Lib
+    DEVILScriptUIToggleImage.Name = "DEVILScriptUIToggleImage"
+    DEVILScriptUIToggleImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    DEVILScriptUIToggleImage.BorderSizePixel = 0
+    DEVILScriptUIToggleImage.Position = UDim2.new(-0.000535105821, 0, 0.450186282, 0)
+    DEVILScriptUIToggleImage.Size = UDim2.new(0.0482160076, 0, 0.0994035751, 0)
+    DEVILScriptUIToggleImage.ZIndex = math.huge
+    DEVILScriptUIToggleImage.AutoButtonColor = false
+    DEVILScriptUIToggleImage.Image = "http://www.roblox.com/asset/?id=9851848884"
+    DEVILScriptUIToggleImage.ScaleType = Enum.ScaleType.Crop
+
+    -- Scripts:
+
+    local script = Instance.new('Script', DEVILScriptUIToggleImage)
+    script.Name = "DEVILScriptUIToggleImageScript"
+    local function onInputBegan(input, gameProcessed)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            Main.Visible = not Main.Visible
+        end
+    end
+    script.Parent.InputBegan:Connect(onInputBegan)
+
+
+    --[[
     local function BUbABUBAPUTA_fake_script()
     local script1 = Instance.new('Script', Main)
         game:GetService("UserInputService").InputBegan:Connect(function(key)
@@ -121,7 +147,61 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
         end)
     end
     coroutine.wrap(BUbABUBAPUTA_fake_script)()
-]]
+    ]]
+
+    local function ZBUJHKQA_fake_script() -- Main.Draggable 
+        local script = Instance.new('Script', DEVILScriptUIToggleImage)
+
+        --[[
+        
+            Works on mobile to 🥱
+            If this dont work then just throw you pc/mobile retard 😂
+        
+        ]]
+
+
+        
+        local UserInputService = game:GetService("UserInputService")
+
+        local gui = script.Parent
+
+        local dragging
+        local dragInput
+        local dragStart
+        local startPos
+
+        local function update(input)
+        	local delta = input.Position - dragStart
+        	gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+
+        gui.InputBegan:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        		dragging = true
+        		dragStart = input.Position
+        		startPos = gui.Position
+        		
+        		input.Changed:Connect(function()
+        			if input.UserInputState == Enum.UserInputState.End then
+        				dragging = false
+        			end
+        		end)
+        	end
+        end)
+
+        gui.InputChanged:Connect(function(input)
+        	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        		dragInput = input
+        	end
+        end)
+
+        UserInputService.InputChanged:Connect(function(input)
+        	if input == dragInput and dragging then
+        		update(input)
+        	end
+        end)
+    end
+    coroutine.wrap(ZBUJHKQA_fake_script)()
 
 
     local function ZBUJHKQ_fake_script() -- Main.Draggable 
@@ -1987,7 +2067,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 end
 
 --[[
-local DEVIL_UI_Library = DEVIL_UI_Library_PC
+local DEVIL_UI_Library = DEVIL_UI_Library_Mobile
 local Window = DEVIL_UI_Library:CreateWindow("YT - DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 
 local Main = Window:CreateTab("Main")
