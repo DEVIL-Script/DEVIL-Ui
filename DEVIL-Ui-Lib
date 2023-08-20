@@ -499,6 +499,69 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
 
         end
 
+        
+        --Help
+
+        function PagesHandler:CreateTextBox(TextBoxLabel, TextBoxText, callback)
+            TextBoxLabel = TextBoxLabel or "Text Box Label"
+            TextBoxText = TextBoxText or "TextBox"
+            callback = callback or function() end
+
+            local PageTextBoxFrame = Instance.new("Frame")
+            local TextBox = Instance.new("TextBox")
+            local TextBoxTextLabel = Instance.new("TextLabel")
+            local PageTextBoxFrameCorner = Instance.new("UICorner")
+            local TextBoxCorner = Instance.new("UICorner")
+
+            
+            PageTextBoxFrame.Name = "PageTextBoxFrame"
+            PageTextBoxFrame.Parent = newPage
+            PageTextBoxFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            PageTextBoxFrame.BorderSizePixel = 0
+            PageTextBoxFrame.Position = UDim2.new(0.0211267602, 0, 0.0235245991, 0)
+            PageTextBoxFrame.Size = UDim2.new(0, 340, 0, 25)
+
+            TextBoxTextLabel.Name = "TextBoxTextLabel"
+            TextBoxTextLabel.Parent = PageTextBoxFrame
+            TextBoxTextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextBoxTextLabel.BackgroundTransparency = 1.000
+            TextBoxTextLabel.BorderSizePixel = 0
+            TextBoxTextLabel.Position = UDim2.new(0.0294117648, 0, 0, 0)
+            TextBoxTextLabel.Size = UDim2.new(0, 300, 0, 25)
+            TextBoxTextLabel.Font = Enum.Font.Cartoon
+            TextBoxTextLabel.Text = TextBoxLabel
+            TextBoxTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextBoxTextLabel.TextSize = 15.000
+            TextBoxTextLabel.TextStrokeTransparency = 0.900
+            TextBoxTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+            PageTextBoxFrameCorner.Name = "PageTextBoxFrameCorner"
+            PageTextBoxFrameCorner.Parent = PageTextBoxFrame
+
+            TextBox.Parent = PageTextBoxFrame
+            TextBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextBox.BorderSizePixel = 0
+            TextBox.Position = UDim2.new(0.600000024, 10, 0.075000003, 0)
+            TextBox.Size = UDim2.new(0, 125, 0, 23)
+            TextBox.Font = Enum.Font.Cartoon
+            TextBox.PlaceholderText = TextBoxText
+            TextBox.Text = ""
+            TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextBox.ClearTextOnFocus = false
+            TextBox.TextScaled = true
+            TextBox.TextSize = 14.000
+            TextBox.TextWrapped = true
+            TextBox.TextXAlignment = Enum.TextXAlignment.Right
+
+            TextBoxCorner.Name = "TextBoxCorner"
+            TextBoxCorner.Parent = TextBox
+            
+            TextBox.FocusLost:Connect(function()
+				callback(TextBox.Text)
+            end)
+
+        end
 
 		function PagesHandler:CreateButton(ButtonText, callback)
 			ButtonText = ButtonText or "Text Button"
@@ -1548,6 +1611,74 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             SectionCorner.Parent = SectionText
         end
 
+        function PagesHandler:CreateTextBox(TextBoxLabel, TextBoxText, callback)
+            TextBoxLabel = TextBoxLabel or "Text Box Label"
+            TextBoxText = TextBoxText or "TextBox"
+            callback = callback or function() end
+
+            local PageTextBoxFrame = Instance.new("Frame")
+            local TextBox = Instance.new("TextBox")
+            local TextBoxTextLabel = Instance.new("TextLabel")
+            local PageTextBoxFrameCorner = Instance.new("UICorner")
+            local TextBoxCorner = Instance.new("UICorner")
+
+            --Help
+
+            PageTextBoxFrame.Name = "PageTextBoxFrame"
+            PageTextBoxFrame.Parent = newPage
+            PageTextBoxFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+            PageTextBoxFrame.BorderSizePixel = 0
+            PageTextBoxFrame.Position = UDim2.new(0.0211267602, 0, 0.0235245991, 0)
+            PageTextBoxFrame.Size = UDim2.new(0, 340, 0, 25)
+
+            PageTextBoxFrameCorner.Name = "PageTextBoxFrameCorner"
+            PageTextBoxFrameCorner.Parent = PageTextBoxFrame
+
+
+            TextBoxTextLabel.Name = "TextBoxTextLabel"
+            TextBoxTextLabel.Parent = PageTextBoxFrame
+            TextBoxTextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            TextBoxTextLabel.BackgroundTransparency = 1.000
+            TextBoxTextLabel.BorderSizePixel = 0
+            TextBoxTextLabel.Position = UDim2.new(0.0294117648, 0, 0, 0)
+            TextBoxTextLabel.Size = UDim2.new(0, 186, 0, 25)
+            TextBoxTextLabel.Font = Enum.Font.Cartoon
+            TextBoxTextLabel.Text = TextBoxLabel
+            TextBoxTextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextBoxTextLabel.TextSize = 15.000
+            TextBoxTextLabel.TextStrokeTransparency = 0.900
+            TextBoxTextLabel.TextTransparency = 0.300
+            TextBoxTextLabel.TextWrapped = true
+            TextBoxTextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+            TextBox.Parent = PageTextBoxFrame
+            TextBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+            TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TextBox.BorderSizePixel = 0
+            TextBox.Position = UDim2.new(0.600000024, 10, 0.075000003, 0)
+            TextBox.Size = UDim2.new(0, 125, 0, 23)
+            TextBox.Font = Enum.Font.Cartoon
+            TextBox.PlaceholderText = TextBoxText
+            TextBox.Text = ""
+            TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+            TextBox.ClearTextOnFocus = false
+            TextBox.TextScaled = true
+            TextBox.TextSize = 14.000
+            TextBox.TextWrapped = true
+            TextBox.TextXAlignment = Enum.TextXAlignment.Right
+
+
+            TextBoxCorner.Name = "TextBoxCorner"
+            TextBoxCorner.Parent = TextBox
+
+
+            TextBox.FocusLost:Connect(function()
+				callback(TextBox.Text)
+            end)
+
+        end
+              
+
 
         function PagesHandler:CreateButton(ButtonText, callback)
 			ButtonText = ButtonText or "Text Button"
@@ -1591,7 +1722,6 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
                 end
             end
             PageButton.InputBegan:Connect(onInputBegan)
-
         end
 
 
@@ -1673,10 +1803,8 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
                 end
             end
 
-            ToggleButton.InputBegan:Connect(onInputBegan)
             ToggleButton.InputEnded:Connect(onInputEnded)
 
-            
         end
 
 
@@ -2067,24 +2195,23 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 end
 
 --[[
-local DEVIL_UI_Library = DEVIL_UI_Library_Mobile
+local DEVIL_UI_Library = DEVIL_UI_Library_PC
 local Window = DEVIL_UI_Library:CreateWindow("YT - DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 
 local Main = Window:CreateTab("Main")
+local printthis
 
-getgenv().acws = false
-Main:CreateToggle("Auto Complete WorkShift", function(bool)
-    getgenv().acws = bool
-    if bool then
-        spawn(function()
-            while acws do wait()
-                pcall(function()
-                    print("A")
-                end)
-            end
-        end)
-    end
+Main:CreateTextBox("Text Label:", "Text Here", function(bool)
+    printthis = bool
+    print(bool)
 end)
+
+
+
+Main:CreateButton("Auto Codes", function()
+    print(printthis)
+end)
+
 ]]
 local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
