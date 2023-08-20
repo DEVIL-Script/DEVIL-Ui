@@ -499,8 +499,6 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
 
         end
 
-        
-        --Help
 
         function PagesHandler:CreateTextBox(TextBoxLabel, TextBoxText, callback)
             TextBoxLabel = TextBoxLabel or "Text Box Label"
@@ -1803,6 +1801,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
                 end
             end
 
+            ToggleButton.InputBegan:Connect(onInputBegan)
             ToggleButton.InputEnded:Connect(onInputEnded)
 
         end
@@ -2195,7 +2194,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 end
 
 --[[
-local DEVIL_UI_Library = DEVIL_UI_Library_PC
+local DEVIL_UI_Library = DEVIL_UI_Library_Mobile
 local Window = DEVIL_UI_Library:CreateWindow("YT - DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 
 local Main = Window:CreateTab("Main")
@@ -2206,13 +2205,15 @@ Main:CreateTextBox("Text Label:", "Text Here", function(bool)
     print(bool)
 end)
 
-
+Main:CreateToggle("Auto Codes", function()
+    print(printthis)
+end)
 
 Main:CreateButton("Auto Codes", function()
     print(printthis)
 end)
-
 ]]
+
 local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
     return(DEVIL_UI_Library_Mobile)
