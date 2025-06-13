@@ -1025,38 +1025,54 @@ function DEVIL_UI_Library_Mobile:CreateWindow(GuiName, GameName)
 
             
             local ChangeFunction = callback
-            local function CreateContents(List)
-                for i,v in ipairs(List) do
-                    local DropdownTextButton = Instance.new("TextButton")
-                    local DropdownTextButtonCorner = Instance.new("UICorner")
+    local function CreateContents(List)
+        for i, v in ipairs(List) do
+            local DropdownTextButton = Instance.new("TextButton")
+            local DropdownTextButtonCorner = Instance.new("UICorner")
 
-                    DropdownTextButton.Name = v
-                    DropdownTextButton.Parent = PageDropdownScrollingFrame
-                    DropdownTextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-                    DropdownTextButton.Size = UDim2.new(0, 310, 0, 25)
-                    DropdownTextButton.Font = Enum.Font.Cartoon
-                    DropdownTextButton.Text = v
-                    DropdownTextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-                    DropdownTextButton.TextSize = 15.000
-                    DropdownTextButton.TextStrokeTransparency = 0.900
-                    DropdownTextButton.TextTransparency = 0.300
-                    DropdownTextButton.TextWrapped = true
-        
-                    DropdownTextButtonCorner.CornerRadius = UDim.new(0, 5)
-                    DropdownTextButtonCorner.Name = "DropdownTextButtonCorner"
-                    DropdownTextButtonCorner.Parent = DropdownTextButton
+            DropdownTextButton.Name = v
+            DropdownTextButton.Parent = PageDropdownScrollingFrame
+            DropdownTextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+            DropdownTextButton.Size = UDim2.new(0, 310, 0, 25)
+            DropdownTextButton.Font = Enum.Font.Cartoon
+            DropdownTextButton.Text = "   "..v 
+            DropdownTextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            DropdownTextButton.TextSize = 15.000
+            DropdownTextButton.TextStrokeTransparency = 0.900
+            DropdownTextButton.TextTransparency = 0.300
+            DropdownTextButton.TextWrapped = true
+            DropdownTextButton.TextXAlignment = Enum.TextXAlignment.Left
+            
+            local TextLabel = Instance.new("TextLabel")
+            TextLabel.Name = "ButtonText"
+            TextLabel.Text = v
+            TextLabel.Size = UDim2.new(1, -10, 1, 0)
+            TextLabel.Position = UDim2.new(0, 5, 0, 0)
+            TextLabel.BackgroundTransparency = 1
+            TextLabel.Font = Enum.Font.Cartoon
+            TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextLabel.TextSize = 15
+            TextLabel.TextStrokeTransparency = 0.900
+            TextLabel.TextTransparency = 0.300
+            TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+            TextLabel.Parent = DropdownTextButton
+            DropdownTextButton.Text = ""
 
-                    local function onInputBegan(input, gameProcessed)
-                        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                            DropdownText.Text = DropdownTextButton.Text
-                            coroutine.wrap(ChangeFunction)(DropdownTextButton.Text)
-                        end
-                    end
-                    DropdownTextButton.InputBegan:Connect(onInputBegan)
+            DropdownTextButtonCorner.CornerRadius = UDim.new(0, 5)
+            DropdownTextButtonCorner.Name = "DropdownTextButtonCorner"
+            DropdownTextButtonCorner.Parent = DropdownTextButton
+
+            local function onInputBegan(input, gameProcessed)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                    DropdownText.Text = v
+                    coroutine.wrap(ChangeFunction)(v)
                 end
             end
-            
-            CreateContents(Contents)
+            DropdownTextButton.InputBegan:Connect(onInputBegan)
+        end
+    end
+
+    CreateContents(Contents)
 
         end
 
@@ -1073,36 +1089,6 @@ end
 --return DEVIL_UI_Library_Mobile
 
 ------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2152,36 +2138,45 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
             
             local ChangeFunction = callback
             local function CreateContents(List)
-                for i,v in ipairs(List) do
+                for i, v in ipairs(List) do
                     local DropdownTextButton = Instance.new("TextButton")
                     local DropdownTextButtonCorner = Instance.new("UICorner")
+                    local TextPadding = Instance.new("UIPadding")
 
+                    -- Button setup
                     DropdownTextButton.Name = v
                     DropdownTextButton.Parent = PageDropdownScrollingFrame
                     DropdownTextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
                     DropdownTextButton.Size = UDim2.new(0, 310, 0, 25)
                     DropdownTextButton.Font = Enum.Font.Cartoon
-                    DropdownTextButton.Text = v
+                    DropdownTextButton.Text = "   "..v -- 3-space left padding
                     DropdownTextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
                     DropdownTextButton.TextSize = 15.000
                     DropdownTextButton.TextStrokeTransparency = 0.900
                     DropdownTextButton.TextTransparency = 0.300
                     DropdownTextButton.TextWrapped = true
-        
+                    DropdownTextButton.TextXAlignment = Enum.TextXAlignment.Left -- Force left align
+                    
+                    -- Proper padding solution
+                    TextPadding.Parent = DropdownTextButton
+                    TextPadding.PaddingLeft = UDim.new(0, 8) -- 8px left padding
+                    
+                    -- Corner rounding
                     DropdownTextButtonCorner.CornerRadius = UDim.new(0, 5)
                     DropdownTextButtonCorner.Name = "DropdownTextButtonCorner"
                     DropdownTextButtonCorner.Parent = DropdownTextButton
 
+                    -- Click handler
                     local function onInputBegan(input, gameProcessed)
                         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                            DropdownText.Text = DropdownTextButton.Text
-                            coroutine.wrap(ChangeFunction)(DropdownTextButton.Text)
+                            DropdownText.Text = string.gsub(DropdownTextButton.Text, "^%s+", "") -- Remove padding spaces when selected
+                            coroutine.wrap(ChangeFunction)(v) -- Pass original value without padding
                         end
                     end
                     DropdownTextButton.InputBegan:Connect(onInputBegan)
                 end
             end
-            
+
             CreateContents(Contents)
         end
 
@@ -2194,7 +2189,7 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 end
 
 --[[
-local DEVIL_UI_Library = DEVIL_UI_Library_Mobile
+local DEVIL_UI_Library = DEVIL_UI_Library_PC
 local Window = DEVIL_UI_Library:CreateWindow("YT - DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
 
 local Main = Window:CreateTab("Main")
@@ -2213,6 +2208,7 @@ Main:CreateButton("Auto Codes", function()
     print(printthis)
 end)
 ]]
+
 
 local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
