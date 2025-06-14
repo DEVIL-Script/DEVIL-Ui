@@ -47,3 +47,4 @@ local emojis = {
     news = "\u{1F4F0}",          -- 📰
     copy = "\u{1F4CB}"           -- 📋
 }
+return emojis
