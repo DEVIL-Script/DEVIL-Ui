@@ -44,6 +44,7 @@ local emojis = {
     clip = "\u{1F4CE}",          -- 📎
     alert = "\u{1F4E2}",         -- 📢
     close = "\u{274C}",          -- ❌
+    dustbin = "\u{1F5D1}",       -- 🗑
     web = "\u{1F310}",           -- 🌐
     upload = "\u{2B06}",         -- ⬆️
     news = "\u{1F4F0}",          -- 📰
