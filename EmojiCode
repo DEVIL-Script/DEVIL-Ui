@@ -8,6 +8,8 @@ local emojis = {
     treasure = "\u{1F4B0}",      -- 💰
     gift = "\u{1F381}",          -- 🎁
     star = "\u{1F31F}",          -- 🌟
+    star2 = "\u{2B50}",          -- ⭐
+    moon = "\u{1F319}",          -- 🌙
     oni = "\u{1F479}",           -- 👹
     alien = "\u{1F47E}",         -- 👾
     skull = "\u{1F480}",         -- 💀
@@ -43,7 +45,7 @@ local emojis = {
     alert = "\u{1F4E2}",         -- 📢
     close = "\u{274C}",          -- ❌
     web = "\u{1F310}",           -- 🌐
-    upload = "\u{2B06}",          -- ⬆️
+    upload = "\u{2B06}",         -- ⬆️
     news = "\u{1F4F0}",          -- 📰
     copy = "\u{1F4CB}"           -- 📋
 }
