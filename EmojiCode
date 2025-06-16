@@ -1,6 +1,7 @@
 local emojis = {
     unlocked = "\u{1F513}",       -- 🔓
     blocked = "\u{1F6AB}",        -- 🚫
+    wrench = "\u{1F6E0}",         -- 🛠️
     money_fly = "\u{1F4B8}",      -- 💸
     volleyball = "\u{1F3D0}",     -- 🏐
     crown = "\u{1F451}",          -- 👑
