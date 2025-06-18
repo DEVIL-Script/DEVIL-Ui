@@ -51,6 +51,8 @@ local emojis = {
     web = "\u{1F310}",            -- 🌐
     upload = "\u{2B06}",          -- ⬆️
     news = "\u{1F4F0}",           -- 📰
-    copy = "\u{1F4CB}"            -- 📋
+    copy = "\u{1F4CB}",           -- 📋
+    honeypot = "\u{1F36F}",       -- 🍯
+    seed = "\u{1F331}"            -- 🌱
 }
 return emojis
