@@ -52,7 +52,7 @@ local emojis = {
     upload = "\u{2B06}",          -- ⬆️
     news = "\u{1F4F0}",           -- 📰
     copy = "\u{1F4CB}",           -- 📋
-    honeypot = "\u{1F36F}",       -- 🍯
+    honey_pot = "\u{1F36F}",       -- 🍯
     seed = "\u{1F331}"            -- 🌱
 }
 return emojis
