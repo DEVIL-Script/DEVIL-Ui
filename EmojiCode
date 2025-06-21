@@ -14,6 +14,7 @@ local emojis = {
     oni = "\u{1F479}",            -- 👹
     alien = "\u{1F47E}",          -- 👾
     skull = "\u{1F480}",          -- 💀
+    pawprints = "\u{1F43E}",      -- 🐾
     dna = "\u{1F9EC}",            -- 🧬
     graduation = "\u{1F393}",     -- 🎓
     punch = "\u{1F44A}",          -- 👊
