@@ -53,6 +53,7 @@ local emojis = {
     dustbin = "\u{1F5D1}",        -- 🗑
     web = "\u{1F310}",            -- 🌐
     upload = "\u{2B06}",          -- ⬆️
+    download = "\u{2B07}",        -- ⬇️
     news = "\u{1F4F0}",           -- 📰
     copy = "\u{1F4CB}",           -- 📋
     honey_pot = "\u{1F36F}",      -- 🍯
