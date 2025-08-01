@@ -12,6 +12,7 @@ local emojis = {
     star = "\u{1F31F}",           -- 🌟
     star2 = "\u{2B50}",           -- ⭐
     moon = "\u{1F319}",           -- 🌙
+    castle = "\u{1F3F0}",         -- 🏰
     oni = "\u{1F479}",            -- 👹
     alien = "\u{1F47E}",          -- 👾
     skull = "\u{1F480}",          -- 💀
