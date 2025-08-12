@@ -2144,12 +2144,12 @@ local MobileDev
 if UserInputService.TouchEnabled then
     MobileDev = true
 else
-    MobileDev = false
+    MobileDev = true
 end
 
-local DEVIL_UI_Library = {}
+local DEVIL_UI_Library_PC = {}
 
-function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
+function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
     GuiName = GuiName or "Name"
     GameName = GameName or "Game Name"
 
@@ -2173,6 +2173,65 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     ScreenGui.Parent = game.CoreGui
     ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     
+
+     local DEVILScriptUIToggleImage = Instance.new("ImageButton")
+    DEVILScriptUIToggleImage.Name = "DEVILScriptUIToggleImage"
+    DEVILScriptUIToggleImage.Parent = ScreenGui
+    DEVILScriptUIToggleImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    DEVILScriptUIToggleImage.BorderSizePixel = 0
+    DEVILScriptUIToggleImage.Position = UDim2.new(0, 10, 0.5, 0)  -- You can adjust the position
+    DEVILScriptUIToggleImage.Size = UDim2.new(0, 40, 0, 40)
+    DEVILScriptUIToggleImage.ZIndex = 1000000000
+    DEVILScriptUIToggleImage.AutoButtonColor = false
+    DEVILScriptUIToggleImage.Image = "http://www.roblox.com/asset/?id=9851848884"
+    DEVILScriptUIToggleImage.ScaleType = Enum.ScaleType.Crop
+
+    -- Connect toggle functionality
+    DEVILScriptUIToggleImage.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            Main.Visible = not Main.Visible
+        end
+    end)
+
+    -- Optional: Make the toggle button draggable
+    local UserInputService = game:GetService("UserInputService")
+    local dragging, dragInput, dragStart, startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        DEVILScriptUIToggleImage.Position = UDim2.new(
+            startPos.X.Scale, startPos.X.Offset + delta.X,
+            startPos.Y.Scale, startPos.Y.Offset + delta.Y
+        )
+    end
+
+    DEVILScriptUIToggleImage.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = DEVILScriptUIToggleImage.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    DEVILScriptUIToggleImage.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+
+
     Main.Name = "Main"
     Main.Parent = ScreenGui
     Main.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -2294,17 +2353,72 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     end
     coroutine.wrap(LNWIAV_fake_script)()
 
+
+
+    local DEVILScriptUIToggleImage = Instance.new("ImageButton")
+    DEVILScriptUIToggleImage.Parent = DEVIL_UI_Lib
+    DEVILScriptUIToggleImage.Name = "DEVILScriptUIToggleImage"
+    DEVILScriptUIToggleImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    DEVILScriptUIToggleImage.BorderSizePixel = 0
+    DEVILScriptUIToggleImage.Position = UDim2.new(0, 10, 0.45, 0)  -- positive X offset
+    DEVILScriptUIToggleImage.Size = UDim2.new(0.048, 0, 0.099, 0)
+    DEVILScriptUIToggleImage.ZIndex = 1000
+    DEVILScriptUIToggleImage.AutoButtonColor = true
+    DEVILScriptUIToggleImage.Image = "http://www.roblox.com/asset/?id=9851848884"
+    DEVILScriptUIToggleImage.ScaleType = Enum.ScaleType.Crop
+
+    -- Connect toggle visibility (no extra script instance)
+    DEVILScriptUIToggleImage.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            Main.Visible = not Main.Visible
+        end
+    end)
+
+    -- Draggable toggle button
+    local UserInputService = game:GetService("UserInputService")
+    local gui = DEVILScriptUIToggleImage
+
+    local dragging
+    local dragInput
+    local dragStart
+    local startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+
+    gui.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = gui.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    gui.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+            dragInput = input
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input == dragInput and dragging then
+            update(input)
+        end
+    end)
+
+
+
     local function QVUFO_fake_script() -- Main.DraggableScript 
         local script = Instance.new('Script', Main)
 
-        --[[
-                
-            Works on mobile to 🥱
-            If this dont work then just throw you pc/mobile retard 😂
-        
-        ]]
-        
-        
         
         local UserInputService = game:GetService("UserInputService")
         
@@ -2350,36 +2464,6 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     local function FAIHHBB_fake_script() -- Line.Script 
         local script = Instance.new('Script', Line)
 
-        --[[local fakename = script.Parent
-        local top = 100
-        while true do
-            wait()
-            for i = 1,top,1 do
-                fakename.BackgroundColor3 = Color3.new(i/top,0/top,0/top)
-                wait()
-            end
-            for i = 1,top,1 do
-                fakename.BackgroundColor3 = Color3.new(top/top,i/top,0/top)
-                wait()
-            end
-            for i = 1,top,1 do
-                fakename.BackgroundColor3 = Color3.new(top/top,top/top,i/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BackgroundColor3 = Color3.new(i/top,top/top,top/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BackgroundColor3 = Color3.new(0/top,i/top,top/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BackgroundColor3 = Color3.new(0/top,0/top,i/top)
-                wait()
-            end
-        end
-        ]]
         spawn(function()
             while wait() do
                 pcall(function()
@@ -2399,36 +2483,6 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     local function CAKBVSK_fake_script() -- Main.Script 
         local script = Instance.new('Script', Main)
 
-        --[[local fakename = script.Parent
-        local top = 100
-        while true do
-            wait()
-            for i = 1,top,1 do
-                fakename.BorderColor3 = Color3.new(i/top,0/top,0/top)
-                wait()
-            end
-            for i = 1,top,1 do
-                fakename.BorderColor3 = Color3.new(top/top,i/top,0/top)
-                wait()
-            end
-            for i = 1,top,1 do
-                fakename.BorderColor3 = Color3.new(top/top,top/top,i/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BorderColor3 = Color3.new(i/top,top/top,top/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BorderColor3 = Color3.new(0/top,i/top,top/top)
-                wait()
-            end
-            for i = top,1,-1 do
-                fakename.BorderColor3 = Color3.new(0/top,0/top,i/top)
-                wait()
-            end
-        end]]
-        
         spawn(function()
             while wait() do
                 pcall(function()
