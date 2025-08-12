@@ -1072,9 +1072,9 @@ end
 
 
 
-local DEVIL_UI_Library_PC = {}
+local DEVIL_UI_Library = {}
 
-function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
+function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     GuiName = GuiName or "Name"
     GameName = GameName or "Game Name"
 
@@ -2104,7 +2104,7 @@ local UserInputService = game:GetService("UserInputService")
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
     return(DEVIL_UI_Library_Mobile)
 elseif not UserInputService.TouchEnabled and UserInputService.KeyboardEnabled and UserInputService.MouseEnabled then
-    return(DEVIL_UI_Library_PC)
+    return(DEVIL_UI_Library)
 else
     return(DEVIL_UI_Library_Mobile)
 end
@@ -2114,7 +2114,7 @@ end
 
 
 
-print("WORKING TILL HERE")
+
 
 
 
@@ -2149,7 +2149,7 @@ end
 
 local DEVIL_UI_Library = {}
 
-function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
+function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     GuiName = GuiName or "Name"
     GameName = GameName or "Game Name"
 
@@ -3300,5 +3300,4 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 
 end
 
-print("WORKING TILL RETURN")
 return DEVIL_UI_Library
