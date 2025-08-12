@@ -2353,18 +2353,6 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     tabListing.Parent = allTabs
 
 
-    local function WCDCV_fake_script()
-        local script = Instance.new('Script', Main)
-
-        game:GetService("UserInputService").InputBegan:Connect(function(key)
-            if key.KeyCode == Enum.KeyCode[_G.ToggleUI] then
-                script.Parent.Parent.Enabled = not script.Parent.Parent.Enabled
-            end
-        end)
-    end
-    coroutine.wrap(WCDCV_fake_script)()
-
-
     local function LNWIAV_fake_script() -- allTabs.ScrollFrameFixer 
         local script = Instance.new('Script', allTabs)
 
