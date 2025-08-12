@@ -2187,7 +2187,7 @@ local MobileDev
 if UserInputService.TouchEnabled then
     MobileDev = true
 else
-    MobileDev = true
+    MobileDev = false
 end
 
 local DEVIL_UI_Library = {}
