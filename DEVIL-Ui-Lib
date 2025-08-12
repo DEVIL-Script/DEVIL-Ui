@@ -2114,6 +2114,21 @@ end
 
 
 
+print("WORKING TILL HERE")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 getgenv().MobileScale = getgenv().MobileScale or 0.8 
 
@@ -2129,7 +2144,7 @@ local MobileDev
 if UserInputService.TouchEnabled then
     MobileDev = true
 else
-    MobileDev = true
+    MobileDev = false
 end
 
 local DEVIL_UI_Library = {}
@@ -3285,4 +3300,5 @@ function DEVIL_UI_Library_PC:CreateWindow(GuiName, GameName)
 
 end
 
+print("WORKING TILL RETURN")
 return DEVIL_UI_Library
