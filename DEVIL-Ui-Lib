@@ -2708,7 +2708,6 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             local TextLabel = Instance.new("TextLabel")
             local TextLabelCorner = Instance.new("UICorner")
 
-
             PageTextLabelFrame.Name = "PageTextLabelFrame"
             PageTextLabelFrame.Parent = newPage
             PageTextLabelFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
@@ -2716,7 +2715,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             PageTextLabelFrame.BorderSizePixel = 0
             PageTextLabelFrame.Position = UDim2.new(0.0211267602, 0, 0.0235245991, 0)
             PageTextLabelFrame.Size = UDim2.new(0, 340, 0, 25)
-        
+
             TextLabel.Parent = PageTextLabelFrame
             TextLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
             TextLabel.BorderSizePixel = 0
@@ -2727,9 +2726,11 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             TextLabel.TextSize = 15.000
             TextLabel.TextStrokeTransparency = 0.900
             TextLabel.TextTransparency = 0.300
-        
+
             TextLabelCorner.Name = "TextLabelCorner"
             TextLabelCorner.Parent = TextLabel
+
+            return TextLabel -- This lets us store & update it
         end
 
 
