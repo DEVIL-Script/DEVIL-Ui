@@ -1,6 +1,7 @@
 local emojis = {
     unlocked = "\u{1F513}",       -- 🔓
     bomb = "\u{1F4A3}",           -- 🧨
+    block = "\u{1F9F1}",          -- 🧱
     blocked = "\u{1F6AB}",        -- 🚫
     checkmark = "\u{2705}",       -- ✅
     running = "\u{1F3C3}",        -- 🏃
