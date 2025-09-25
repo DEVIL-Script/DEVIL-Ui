@@ -5,6 +5,7 @@ local emojis = {
     blocked = "\u{1F6AB}",        -- 🚫
     checkmark = "\u{2705}",       -- ✅
     running = "\u{1F3C3}",        -- 🏃
+    person = "\u{1F464}",         -- 👤
     dash = "\u{2796}",            -- ➖
     wrench = "\u{1F6E0}",         -- 🛠️
     money_fly = "\u{1F4B8}",      -- 💸
