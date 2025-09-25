@@ -40,6 +40,7 @@ local emojis = {
     timer = "\u{23F1}",           -- ⏱️
     water = "\u{1F4A7}",          -- 💧
     earth = "\u{1F30D}",          -- 🌍
+    plasma = "\u{269B}",          -- ⚛
     lightning = "\u{26A1}",       -- ⚡
     premium = "\u{1F48E}",        -- 💎
     locked = "\u{1F512}",         -- 🔒
