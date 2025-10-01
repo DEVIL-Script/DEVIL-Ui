@@ -60,6 +60,7 @@ local emojis = {
     sick = "\u{1F912}",           -- 🤒
     toolbox = "\u{1F9F0}",        -- 🧰
     see_no_evil = "\u{1F648}",    -- 🙈
+    flag = "\u{1F6A9}",           -- 🚩
     broom = "\u{1F9F9}",          -- 🧹
     bug = "\u{1F41E}",            -- 🐞
     settings = "\u{2699}",        -- ⚙️
