@@ -721,7 +721,6 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             local ToggleButton = Instance.new("TextButton")
             local ToggleButtonCorner = Instance.new("UICorner")
             local ToggleFrameCorner = Instance.new("UICorner")
-            local UIStroke = Instance.new("UIStroke")
 
             PageToggleFrame.Name = "PageToggleFrame"
             PageToggleFrame.Parent = newPage
@@ -745,7 +744,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
 
             ToggleButton.Name = "ToggleButton"
             ToggleButton.Parent = PageToggleFrame
-            ToggleButton.BackgroundColor3 = Color3.fromRGB(120, 30, 30) -- red when off
+            ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 70, 70) -- bright red default
             ToggleButton.Position = UDim2.new(0.91, 0, 0.08, 0)
             ToggleButton.Size = UDim2.new(0, 20, 0, 20)
             ToggleButton.Font = Enum.Font.SourceSans
@@ -757,28 +756,15 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             ToggleButtonCorner.Parent = ToggleButton
             ToggleFrameCorner.Parent = PageToggleFrame
 
-            -- Outline color changes dynamically (red when off, green when on)
-            UIStroke.Name = "ToggleOutline"
-            UIStroke.Color = Color3.fromRGB(255, 80, 80) -- red default
-            UIStroke.Thickness = 2
-            UIStroke.Transparency = 0
-            UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-            UIStroke.Parent = ToggleButton
-
             local tog = defaultValue or false
             local isDragging = false
             local TweenService = game:GetService("TweenService")
 
             local function animateToggle()
-                local targetColor = tog and Color3.fromRGB(25, 120, 25) or Color3.fromRGB(120, 30, 30)
-                local targetOutline = tog and Color3.fromRGB(0, 255, 100) or Color3.fromRGB(255, 80, 80)
+                local targetColor = tog and Color3.fromRGB(0, 255, 120) or Color3.fromRGB(255, 70, 70)
 
                 TweenService:Create(ToggleButton, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
                     BackgroundColor3 = targetColor
-                }):Play()
-
-                TweenService:Create(UIStroke, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
-                    Color = targetOutline
                 }):Play()
             end
 
@@ -804,6 +790,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             ToggleButton.InputBegan:Connect(onInputBegan)
             ToggleButton.InputEnded:Connect(onInputEnded)
         end
+
 
 
 		function PagesHandler:CreateSlider(SliderMainText, options, callback, defaultValue)
@@ -1228,7 +1215,9 @@ local MainFarm = Window:CreateTab("Main")
 MainFarm:CreateToggle("Test", function(bool) 
    print(bool)
 end)
+MainFarm:CreateToggle("Test", function(bool) 
+   print(bool)
+end)
 ]]
-
 
 return DEVIL_UI_Library
