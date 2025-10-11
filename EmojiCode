@@ -1,5 +1,6 @@
 local emojis = {
     unlocked = "\u{1F513}",       -- 🔓
+    reserved = "\u{1F511}",       -- 🔑
     bomb = "\u{1F4A3}",           -- 🧨
     block = "\u{1F9F1}",          -- 🧱
     blocked = "\u{1F6AB}",        -- 🚫
