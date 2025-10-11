@@ -75,6 +75,7 @@ local emojis = {
     news = "\u{1F4F0}",           -- 📰
     copy = "\u{1F4CB}",           -- 📋
     honey_pot = "\u{1F36F}",      -- 🍯
+    halloween = "\u{1F383}",      -- 🎃
     seed = "\u{1F331}"            -- 🌱
 }
 return emojis
