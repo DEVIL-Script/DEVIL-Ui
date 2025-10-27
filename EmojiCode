@@ -1,4 +1,5 @@
 local emojis = {
+    click = "\u{1F446}",          -- 👆
     unlocked = "\u{1F513}",       -- 🔓
     reserved = "\u{1F511}",       -- 🔑
     bomb = "\u{1F4A3}",           -- 🧨
