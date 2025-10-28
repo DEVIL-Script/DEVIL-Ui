@@ -1,5 +1,5 @@
 local emojis = {
-    hourglass_done = "\u{231B}",  -- ⌛
+    time = "\u{231B}",            -- ⌛
     click = "\u{1F446}",          -- 👆
     unlocked = "\u{1F513}",       -- 🔓
     reserved = "\u{1F511}",       -- 🔑
