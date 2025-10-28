@@ -1,5 +1,6 @@
 local emojis = {
     time = "\u{231B}",            -- ⌛
+    medal = "\u{1F3C5}",          -- 🏅
     click = "\u{1F446}",          -- 👆
     unlocked = "\u{1F513}",       -- 🔓
     reserved = "\u{1F511}",       -- 🔑
