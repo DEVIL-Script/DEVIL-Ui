@@ -1,4 +1,5 @@
 local emojis = {
+    ticket = "\u{1F3AB}",         -- 🎫
     time = "\u{231B}",            -- ⌛
     medal = "\u{1F3C5}",          -- 🏅
     click = "\u{1F446}",          -- 👆
