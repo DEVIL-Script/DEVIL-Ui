@@ -1,4 +1,5 @@
 local emojis = {
+    tree = "\u{1F333}",           -- 🌳
     axe = "\u{1FA93}",            -- 🪓
     pickaxe = "\u{26CF}",         -- ⛏️
     apple = "\u{1F34E}",          -- 🍎
