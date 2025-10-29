@@ -1,5 +1,10 @@
 local emojis = {
+    apple = "\u{1F34E}",          -- 🍎
     carrot = "\u{1F955}",         -- 🥕
+    grape = "\u{1F347}",          -- 🍇
+    strawberry = "\u{1F353}",     -- 🍓
+    pineapple = "\u{1F34D}",      -- 🍍
+    banana = "\u{1F34C}",         -- 🍌
     ticket = "\u{1F3AB}",         -- 🎫
     dice = "\u{1F3B2}",           -- 🎲
     time = "\u{231B}",            -- ⌛
