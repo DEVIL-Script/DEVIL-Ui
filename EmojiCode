@@ -1,4 +1,6 @@
 local emojis = {
+    axe = "\u{1FA93}",            -- 🪓
+    pickaxe = "\u{26CF}",         -- ⛏️
     apple = "\u{1F34E}",          -- 🍎
     carrot = "\u{1F955}",         -- 🥕
     grape = "\u{1F347}",          -- 🍇
