@@ -1,4 +1,5 @@
 local emojis = {
+    carrot = "\u{1F955}",         -- 🥕
     ticket = "\u{1F3AB}",         -- 🎫
     dice = "\u{1F3B2}",           -- 🎲
     time = "\u{231B}",            -- ⌛
