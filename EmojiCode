@@ -1,4 +1,5 @@
 local emojis = {
+    home = "\u{1F3E0}",           -- 🏠
     mountain = "\u{1F3D4}",       -- 🏔️
     tree = "\u{1F333}",           -- 🌳
     axe = "\u{1FA93}",            -- 🪓
