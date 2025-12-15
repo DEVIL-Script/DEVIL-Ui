@@ -49,6 +49,7 @@ local emojis = {
     egg = "\u{1F95A}",            -- 🥚
     box = "\u{1F4E6}",            -- 📦
     loop = "\u{1F501}",           -- 🔁
+    loading = "\u{1F504}",        -- 🔄
     door = "\u{1F6AA}",           -- 🚪
     location = "\u{1F4CD}",       -- 📍
     hammer = "\u{2692}",          -- ⚒️
