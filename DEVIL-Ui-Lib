@@ -712,12 +712,12 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
         end
 
 
-                function PagesHandler:CreateToggle(ToggleMainText, callback, defaultValue)
+        function PagesHandler:CreateToggle(ToggleMainText, callback, defaultValue)
             ToggleMainText = ToggleMainText or "Toggle Text"
             callback = callback or function() end
 
             local PageToggleFrame = Instance.new("Frame")
-            local ToggleText = Instance.new("TextLabel")
+            local ToggleTextContainer = Instance.new("Frame") -- Changed from TextLabel to Frame
             local ToggleButton = Instance.new("TextButton")
             local ToggleButtonCorner = Instance.new("UICorner")
             local ToggleFrameCorner = Instance.new("UICorner")
@@ -729,18 +729,55 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             PageToggleFrame.Position = UDim2.new(0.021, 0, 0.023, 0)
             PageToggleFrame.Size = UDim2.new(0, 340, 0, 25)
 
-            ToggleText.Name = "ToggleText"
-            ToggleText.Parent = PageToggleFrame
-            ToggleText.BackgroundTransparency = 1
-            ToggleText.Position = UDim2.new(0.03, 0, 0, 0)
-            ToggleText.Size = UDim2.new(0, 300, 0, 25)
-            ToggleText.Font = Enum.Font.Cartoon
-            ToggleText.Text = ToggleMainText
-            ToggleText.TextColor3 = Color3.fromRGB(235, 235, 235)
-            ToggleText.TextSize = 15
-            ToggleText.TextStrokeTransparency = 0.9
-            ToggleText.TextTransparency = 0.25
-            ToggleText.TextXAlignment = Enum.TextXAlignment.Left
+            ToggleTextContainer.Name = "ToggleTextContainer"
+            ToggleTextContainer.Parent = PageToggleFrame
+            ToggleTextContainer.BackgroundTransparency = 1
+            ToggleTextContainer.Position = UDim2.new(0.03, 0, 0, 0)
+            ToggleTextContainer.Size = UDim2.new(0, 300, 0, 25)
+            
+            -- Check if the text starts with "http" (is an image URL)
+            local isImageUrl = string.sub(ToggleMainText, 1, 4) == "http"
+            
+            if isImageUrl then
+                -- It's an image URL, create ImageLabel + TextLabel
+                local ImageLabel = Instance.new("ImageLabel")
+                ImageLabel.Name = "ToggleImage"
+                ImageLabel.Parent = ToggleTextContainer
+                ImageLabel.BackgroundTransparency = 1
+                ImageLabel.Position = UDim2.new(0, 0, 0.5, -10)
+                ImageLabel.Size = UDim2.new(0, 20, 0, 20)
+                ImageLabel.Image = ToggleMainText
+                ImageLabel.ScaleType = Enum.ScaleType.Fit
+                
+                local TextLabel = Instance.new("TextLabel")
+                TextLabel.Name = "ToggleText"
+                TextLabel.Parent = ToggleTextContainer
+                TextLabel.BackgroundTransparency = 1
+                TextLabel.Position = UDim2.new(0, 25, 0, 0)
+                TextLabel.Size = UDim2.new(0, 275, 0, 25)
+                TextLabel.Font = Enum.Font.Cartoon
+                TextLabel.Text = "Auto PickUp" -- Default text
+                TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
+                TextLabel.TextSize = 15
+                TextLabel.TextStrokeTransparency = 0.9
+                TextLabel.TextTransparency = 0.25
+                TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+            else
+                -- It's regular text, create just a TextLabel
+                local TextLabel = Instance.new("TextLabel")
+                TextLabel.Name = "ToggleText"
+                TextLabel.Parent = ToggleTextContainer
+                TextLabel.BackgroundTransparency = 1
+                TextLabel.Position = UDim2.new(0, 0, 0, 0)
+                TextLabel.Size = UDim2.new(0, 300, 0, 25)
+                TextLabel.Font = Enum.Font.Cartoon
+                TextLabel.Text = ToggleMainText
+                TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
+                TextLabel.TextSize = 15
+                TextLabel.TextStrokeTransparency = 0.9
+                TextLabel.TextTransparency = 0.25
+                TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+            end
 
             ToggleButton.Name = "ToggleButton"
             ToggleButton.Parent = PageToggleFrame
@@ -789,7 +826,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
 
             ToggleButton.InputBegan:Connect(onInputBegan)
             ToggleButton.InputEnded:Connect(onInputEnded)
-		end
+        end
 
 
 
@@ -1219,5 +1256,6 @@ MainFarm:CreateToggle("Test", function(bool)
    print(bool)
 end)
 ]]
+
 
 return DEVIL_UI_Library
