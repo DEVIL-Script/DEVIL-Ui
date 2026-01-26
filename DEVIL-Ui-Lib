@@ -716,8 +716,17 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             ToggleMainText = ToggleMainText or "Toggle Text"
             callback = callback or function() end
 
+            -- normalize input (text / image + text)
+            local text = ToggleMainText
+            local image = nil
+
+            if typeof(ToggleMainText) == "table" then
+                image = ToggleMainText.image
+                text = ToggleMainText.text or "Toggle Text"
+            end
+
             local PageToggleFrame = Instance.new("Frame")
-            local ToggleTextContainer = Instance.new("Frame") -- Changed from TextLabel to Frame
+            local ToggleTextContainer = Instance.new("Frame")
             local ToggleButton = Instance.new("TextButton")
             local ToggleButtonCorner = Instance.new("UICorner")
             local ToggleFrameCorner = Instance.new("UICorner")
@@ -734,21 +743,18 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             ToggleTextContainer.BackgroundTransparency = 1
             ToggleTextContainer.Position = UDim2.new(0.03, 0, 0, 0)
             ToggleTextContainer.Size = UDim2.new(0, 300, 0, 25)
-            
-            -- Check if the text starts with "http" (is an image URL)
-            local isImageUrl = string.sub(ToggleMainText, 1, 4) == "http"
-            
-            if isImageUrl then
-                -- It's an image URL, create ImageLabel + TextLabel
+
+            -- IMAGE + TEXT
+            if typeof(image) == "string" then
                 local ImageLabel = Instance.new("ImageLabel")
                 ImageLabel.Name = "ToggleImage"
                 ImageLabel.Parent = ToggleTextContainer
                 ImageLabel.BackgroundTransparency = 1
                 ImageLabel.Position = UDim2.new(0, 0, 0.5, -10)
                 ImageLabel.Size = UDim2.new(0, 20, 0, 20)
-                ImageLabel.Image = ToggleMainText
+                ImageLabel.Image = image
                 ImageLabel.ScaleType = Enum.ScaleType.Fit
-                
+
                 local TextLabel = Instance.new("TextLabel")
                 TextLabel.Name = "ToggleText"
                 TextLabel.Parent = ToggleTextContainer
@@ -756,14 +762,14 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
                 TextLabel.Position = UDim2.new(0, 25, 0, 0)
                 TextLabel.Size = UDim2.new(0, 275, 0, 25)
                 TextLabel.Font = Enum.Font.Cartoon
-                TextLabel.Text = ToggleMainText or "Toggle Text"
+                TextLabel.Text = text
                 TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
                 TextLabel.TextSize = 15
                 TextLabel.TextStrokeTransparency = 0.9
                 TextLabel.TextTransparency = 0.25
                 TextLabel.TextXAlignment = Enum.TextXAlignment.Left
             else
-                -- It's regular text, create just a TextLabel
+                -- TEXT ONLY
                 local TextLabel = Instance.new("TextLabel")
                 TextLabel.Name = "ToggleText"
                 TextLabel.Parent = ToggleTextContainer
@@ -771,7 +777,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
                 TextLabel.Position = UDim2.new(0, 0, 0, 0)
                 TextLabel.Size = UDim2.new(0, 300, 0, 25)
                 TextLabel.Font = Enum.Font.Cartoon
-                TextLabel.Text = ToggleMainText
+                TextLabel.Text = text
                 TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
                 TextLabel.TextSize = 15
                 TextLabel.TextStrokeTransparency = 0.9
@@ -781,13 +787,10 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
 
             ToggleButton.Name = "ToggleButton"
             ToggleButton.Parent = PageToggleFrame
-            ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 70, 70) -- bright red default
+            ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
             ToggleButton.Position = UDim2.new(0.91, 0, 0.08, 0)
             ToggleButton.Size = UDim2.new(0, 20, 0, 20)
-            ToggleButton.Font = Enum.Font.SourceSans
             ToggleButton.Text = ""
-            ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            ToggleButton.TextSize = 15
 
             ToggleButtonCorner.CornerRadius = UDim.new(0, 20)
             ToggleButtonCorner.Parent = ToggleButton
@@ -798,34 +801,36 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
             local TweenService = game:GetService("TweenService")
 
             local function animateToggle()
-                local targetColor = tog and Color3.fromRGB(0, 255, 120) or Color3.fromRGB(255, 70, 70)
-
-                TweenService:Create(ToggleButton, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
-                    BackgroundColor3 = targetColor
-                }):Play()
+                TweenService:Create(
+                    ToggleButton,
+                    TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+                    {
+                        BackgroundColor3 = tog and Color3.fromRGB(0, 255, 120)
+                            or Color3.fromRGB(255, 70, 70)
+                    }
+                ):Play()
             end
 
             animateToggle()
 
-            local function onInputBegan(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            ToggleButton.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1
+                or input.UserInputType == Enum.UserInputType.Touch then
                     isDragging = true
                 end
-            end
+            end)
 
-            local function onInputEnded(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    if isDragging then
-                        tog = not tog
-                        callback(tog)
-                        animateToggle()
-                        isDragging = false
-                    end
+            ToggleButton.InputEnded:Connect(function(input)
+                if isDragging and (
+                    input.UserInputType == Enum.UserInputType.MouseButton1
+                    or input.UserInputType == Enum.UserInputType.Touch
+                ) then
+                    isDragging = false
+                    tog = not tog
+                    callback(tog)
+                    animateToggle()
                 end
-            end
-
-            ToggleButton.InputBegan:Connect(onInputBegan)
-            ToggleButton.InputEnded:Connect(onInputEnded)
+            end)
         end
 
 
