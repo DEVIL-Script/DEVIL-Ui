@@ -712,84 +712,137 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
         end
 
 
-        function PagesHandler:CreateToggle(ToggleMainText, callback, defaultValue)
-            ToggleMainText = ToggleMainText or "Toggle Text"
-            callback = callback or function() end
-
-            local PageToggleFrame = Instance.new("Frame")
-            local ToggleText = Instance.new("TextLabel")
-            local ToggleButton = Instance.new("TextButton")
-            local ToggleButtonCorner = Instance.new("UICorner")
-            local ToggleFrameCorner = Instance.new("UICorner")
-
-            PageToggleFrame.Name = "PageToggleFrame"
-            PageToggleFrame.Parent = newPage
-            PageToggleFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-            PageToggleFrame.BorderSizePixel = 0
-            PageToggleFrame.Position = UDim2.new(0.021, 0, 0.023, 0)
-            PageToggleFrame.Size = UDim2.new(0, 340, 0, 25)
-
-            ToggleText.Name = "ToggleText"
-            ToggleText.Parent = PageToggleFrame
-            ToggleText.BackgroundTransparency = 1
-            ToggleText.Position = UDim2.new(0.03, 0, 0, 0)
-            ToggleText.Size = UDim2.new(0, 300, 0, 25)
-            ToggleText.Font = Enum.Font.Cartoon
-            ToggleText.Text = ToggleMainText
-            ToggleText.TextColor3 = Color3.fromRGB(235, 235, 235)
-            ToggleText.TextSize = 15
-            ToggleText.TextStrokeTransparency = 0.9
-            ToggleText.TextTransparency = 0.25
-            ToggleText.TextXAlignment = Enum.TextXAlignment.Left
-
-            ToggleButton.Name = "ToggleButton"
-            ToggleButton.Parent = PageToggleFrame
-            ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 70, 70) -- bright red default
-            ToggleButton.Position = UDim2.new(0.91, 0, 0.08, 0)
-            ToggleButton.Size = UDim2.new(0, 20, 0, 20)
-            ToggleButton.Font = Enum.Font.SourceSans
-            ToggleButton.Text = ""
-            ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-            ToggleButton.TextSize = 15
-
-            ToggleButtonCorner.CornerRadius = UDim.new(0, 20)
-            ToggleButtonCorner.Parent = ToggleButton
-            ToggleFrameCorner.Parent = PageToggleFrame
-
-            local tog = defaultValue or false
-            local isDragging = false
-            local TweenService = game:GetService("TweenService")
-
-            local function animateToggle()
-                local targetColor = tog and Color3.fromRGB(0, 255, 120) or Color3.fromRGB(255, 70, 70)
-
-                TweenService:Create(ToggleButton, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
-                    BackgroundColor3 = targetColor
-                }):Play()
-            end
-
-            animateToggle()
-
-            local function onInputBegan(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    isDragging = true
-                end
-            end
-
-            local function onInputEnded(input)
-                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-                    if isDragging then
-                        tog = not tog
-                        callback(tog)
-                        animateToggle()
-                        isDragging = false
-                    end
-                end
-            end
-
-            ToggleButton.InputBegan:Connect(onInputBegan)
-            ToggleButton.InputEnded:Connect(onInputEnded)
-        end
+        -- Enhanced CreateToggle function with image support
+		local OriginalCreateToggle = PagesHandler.CreateToggle
+		
+		function PagesHandler:CreateToggleWithImage(itemName, key, displayName, callback, defaultValue)
+		    displayName = displayName or itemName
+		    
+		    -- Get image URL
+		    local imageUrl = getItemImage(itemName)
+		    
+		    if imageUrl then
+		        -- Create the text with image URL at the beginning
+		        local toggleText = imageUrl .. " Auto PickUp " .. displayName
+		        
+		        -- Call original function with special format
+		        return OriginalCreateToggle(self, toggleText, callback, defaultValue)
+		    else
+		        -- Fallback to emoji
+		        local emoji = emojis.star or "⭐"
+		        return OriginalCreateToggle(self, emoji .. " Auto PickUp " .. displayName, callback, defaultValue)
+		    end
+		end
+		
+		-- Create a wrapper that detects if it's an image URL or regular text
+		local OriginalCreateToggle = PagesHandler.CreateToggle
+		
+		function PagesHandler:CreateToggle(ToggleMainText, callback, defaultValue)
+		    -- Check if it starts with http (image URL)
+		    if string.sub(ToggleMainText, 1, 4) == "http" then
+		        -- Extract image URL and text
+		        local imageUrl, text = ToggleMainText:match("^(https?://.+)%s+(.+)$")
+		        
+		        if imageUrl then
+		            -- Create custom toggle with image
+		            local PageToggleFrame = Instance.new("Frame")
+		            local ToggleTextContainer = Instance.new("Frame")
+		            local ToggleButton = Instance.new("TextButton")
+		            local ToggleButtonCorner = Instance.new("UICorner")
+		            local ToggleFrameCorner = Instance.new("UICorner")
+		
+		            PageToggleFrame.Name = "PageToggleFrame"
+		            PageToggleFrame.Parent = newPage
+		            PageToggleFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		            PageToggleFrame.BorderSizePixel = 0
+		            PageToggleFrame.Position = UDim2.new(0.021, 0, 0.023, 0)
+		            PageToggleFrame.Size = UDim2.new(0, 340, 0, 25)
+		
+		            ToggleTextContainer.Name = "ToggleTextContainer"
+		            ToggleTextContainer.Parent = PageToggleFrame
+		            ToggleTextContainer.BackgroundTransparency = 1
+		            ToggleTextContainer.Position = UDim2.new(0.03, 0, 0, 0)
+		            ToggleTextContainer.Size = UDim2.new(0, 300, 0, 25)
+		            
+		            -- Image
+		            local ImageLabel = Instance.new("ImageLabel")
+		            ImageLabel.Name = "ToggleImage"
+		            ImageLabel.Parent = ToggleTextContainer
+		            ImageLabel.BackgroundTransparency = 1
+		            ImageLabel.Position = UDim2.new(0, 0, 0.5, -10)
+		            ImageLabel.Size = UDim2.new(0, 20, 0, 20)
+		            ImageLabel.Image = imageUrl
+		            ImageLabel.ScaleType = Enum.ScaleType.Fit
+		            
+		            -- Text
+		            local TextLabel = Instance.new("TextLabel")
+		            TextLabel.Name = "ToggleText"
+		            TextLabel.Parent = ToggleTextContainer
+		            TextLabel.BackgroundTransparency = 1
+		            TextLabel.Position = UDim2.new(0, 25, 0, 0)
+		            TextLabel.Size = UDim2.new(0, 275, 0, 25)
+		            TextLabel.Font = Enum.Font.Cartoon
+		            TextLabel.Text = text
+		            TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
+		            TextLabel.TextSize = 15
+		            TextLabel.TextStrokeTransparency = 0.9
+		            TextLabel.TextTransparency = 0.25
+		            TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+		
+		            ToggleButton.Name = "ToggleButton"
+		            ToggleButton.Parent = PageToggleFrame
+		            ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 70, 70)
+		            ToggleButton.Position = UDim2.new(0.91, 0, 0.08, 0)
+		            ToggleButton.Size = UDim2.new(0, 20, 0, 20)
+		            ToggleButton.Font = Enum.Font.SourceSans
+		            ToggleButton.Text = ""
+		            ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		            ToggleButton.TextSize = 15
+		
+		            ToggleButtonCorner.CornerRadius = UDim.new(0, 20)
+		            ToggleButtonCorner.Parent = ToggleButton
+		            ToggleFrameCorner.Parent = PageToggleFrame
+		
+		            local tog = defaultValue or false
+		            local isDragging = false
+		            local TweenService = game:GetService("TweenService")
+		
+		            local function animateToggle()
+		                local targetColor = tog and Color3.fromRGB(0, 255, 120) or Color3.fromRGB(255, 70, 70)
+		                TweenService:Create(ToggleButton, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {
+		                    BackgroundColor3 = targetColor
+		                }):Play()
+		            end
+		
+		            animateToggle()
+		
+		            local function onInputBegan(input)
+		                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		                    isDragging = true
+		                end
+		            end
+		
+		            local function onInputEnded(input)
+		                if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		                    if isDragging then
+		                        tog = not tog
+		                        callback(tog)
+		                        animateToggle()
+		                        isDragging = false
+		                    end
+		                end
+		            end
+		
+		            ToggleButton.InputBegan:Connect(onInputBegan)
+		            ToggleButton.InputEnded:Connect(onInputEnded)
+		            
+		            return PageToggleFrame
+		        end
+		    end
+		    
+		    -- If not an image URL, call original function
+		    return OriginalCreateToggle(self, ToggleMainText, callback, defaultValue)
+		end
 
 
 
