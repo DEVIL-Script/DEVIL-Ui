@@ -756,7 +756,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
                 TextLabel.Position = UDim2.new(0, 25, 0, 0)
                 TextLabel.Size = UDim2.new(0, 275, 0, 25)
                 TextLabel.Font = Enum.Font.Cartoon
-                TextLabel.Text = "Auto PickUp" -- Default text
+                TextLabel.Text = ToggleMainText or "Toggle Text"
                 TextLabel.TextColor3 = Color3.fromRGB(235, 235, 235)
                 TextLabel.TextSize = 15
                 TextLabel.TextStrokeTransparency = 0.9
