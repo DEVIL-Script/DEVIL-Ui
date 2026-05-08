@@ -1237,9 +1237,29 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
                 end
             end
 
-            if savedValue then DropdownText.Text = savedValue end
-    CreateContents(Contents)
-        end
+		if savedValue then 
+			DropdownText.Text = savedValue 
+		end
+
+		CreateContents(Contents)
+
+		local DropdownFunctions = {}
+
+		function DropdownFunctions:Refresh(newList)
+
+			-- delete old buttons
+			for _, v in pairs(PageDropdownScrollingFrame:GetChildren()) do
+				if v:IsA("TextButton") and v.Name ~= "DropdownTextButton" then
+					v:Destroy()
+				end
+			end
+
+			-- recreate buttons
+			CreateContents(newList)
+		end
+
+		return DropdownFunctions
+		end
 
         return PagesHandler
 
@@ -1248,6 +1268,7 @@ function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
     return TabsHandler
 
 end
+
 
 --[[
 local Window = DEVIL_UI_Library:CreateWindow("YT: DEVIL Script", game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
@@ -1260,10 +1281,40 @@ end)
 MainFarm:CreateToggle("Test", function(bool) 
    print(bool)
 end)
+
+
+
+
+local Players = game:GetService("Players")
+
+local selectedPlayer = nil
+local PlayerList = nil
+
+local function getPlayerNames()
+	local list = {}
+
+	for _, plr in ipairs(Players:GetPlayers()) do
+		if plr ~= player then
+			table.insert(list, plr.Name)
+		end
+	end
+
+	table.sort(list)
+
+	return list
+end
+
+PlayerList = MainFarm:CreateDropdown(
+	"Select Player",
+	getPlayerNames(),
+	function(value)
+		print(value)
+	end
+)
+
+-- update button
+MainFarm:CreateButton("Refresh Players", function()
+	PlayerList:Refresh(getPlayerNames())
+end)
 ]]
-
-
-
-
-
 return DEVIL_UI_Library
