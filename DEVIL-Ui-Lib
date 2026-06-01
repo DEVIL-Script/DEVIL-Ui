@@ -14,9 +14,6 @@ end)
 ]]
 
 
-spawn(function()
-    pcall(function()
-
 getgenv().MobileScale = getgenv().MobileScale or 0.8 
 
 
@@ -1337,5 +1334,3 @@ end)
 return DEVIL_UI_Library
 
 
-    end)
-end)
