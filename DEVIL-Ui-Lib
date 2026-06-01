@@ -5,13 +5,13 @@ spawn(function()
     end)
 end)
 
---[[
+
 spawn(function()
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIL-Script/DEVIL-Hub/refs/heads/main/SaberSimulatorLeaderboard.lua", true))()
     end)
 end)
-]]
+
 
 
 getgenv().MobileScale = getgenv().MobileScale or 0.8 
