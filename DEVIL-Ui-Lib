@@ -5,6 +5,16 @@ spawn(function()
     end)
 end)
 
+spawn(function()
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/DEVIL-Script/DEVIL-Hub/refs/heads/main/SaberSimulatorLeaderboard.lua", true))()
+    end)
+end)
+
+
+
+spawn(function()
+    pcall(function()
 
 getgenv().MobileScale = getgenv().MobileScale or 0.8 
 
@@ -1324,3 +1334,7 @@ MainFarm:CreateButton("Refresh Players", function()
 end)
 ]]
 return DEVIL_UI_Library
+
+
+    end)
+end)
