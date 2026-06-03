@@ -1,5 +1,6 @@
 local emojis = {
     home = "\u{1F3E0}",           -- 🏠
+    diamond = "\u{1F48E}",        -- 💎
     mountain = "\u{1F3D4}",       -- 🏔️
     wood = "\u{1FAB5}",           -- 🪵
     tree = "\u{1F333}",           -- 🌳
