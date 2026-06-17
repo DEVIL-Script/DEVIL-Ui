@@ -23,6 +23,8 @@ for i,v in pairs(game.CoreGui:GetChildren()) do
     end
 end
 
+getgenv().PrintableDebugHelloWorld = false
+
 local UserInputService = game:GetService("UserInputService")
 local MobileDev
 if UserInputService.TouchEnabled then
