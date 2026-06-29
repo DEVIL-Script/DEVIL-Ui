@@ -82,6 +82,7 @@ local emojis = {
     orange_circle = "\u{1F7E7}",  -- 🟧
     pink_circle = "\u{1F7E5}",    -- 🟥
     black_heart = "\u{1F5A4}",    -- 🖤
+    red_heart = "\u{2764}",       -- ❤️
     credit_card = "\u{1F4B3}",    -- 💳
     sick = "\u{1F912}",           -- 🤒
     toolbox = "\u{1F9F0}",        -- 🧰
