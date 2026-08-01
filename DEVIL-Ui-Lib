@@ -41,6 +41,36 @@ else
     MobileDev = false
 end
 
+
+
+
+spawn(function()
+    getgenv().ANAFDEVISCRI = false
+    local function stopClickLoop()
+        getgenv().ANAFDEVISCRI = false
+    end
+    local function startClickLoop()
+        stopClickLoop()
+        getgenv().ANAFDEVISCRI = true
+        spawn(function()
+            while getgenv().ANAFDEVISCRI do
+                pcall(function()
+                    local VirtualInputManager = game:GetService("VirtualInputManager")
+                    local size = workspace.CurrentCamera.ViewportSize
+                    
+                    VirtualInputManager:SendMouseButtonEvent(size.X/2, size.Y/2, 0, true, game, 0)
+                    task.wait(0.05)
+                    VirtualInputManager:SendMouseButtonEvent(size.X/2, size.Y/2, 0, false, game, 0)
+                end)
+                task.wait(30)
+            end
+        end)
+    end
+    startClickLoop()
+end)
+
+
+
 local DEVIL_UI_Library = {}
 
 function DEVIL_UI_Library:CreateWindow(GuiName, GameName)
